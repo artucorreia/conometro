@@ -1,2 +1,2 @@
-# conometro
+# cronômetro
  
