@@ -1,5 +1,6 @@
 const timer = window.document.querySelector('div#timer');
 const btns = window.document.querySelector('div#btns');
+const savestxt = window.document.querySelector('div#saves');
 let intervalId = null;
 let andamento = false;
 
@@ -10,10 +11,18 @@ const displayer = (h, min, seg, ms) => {
     timer.innerHTML = `<p>${h}:${min}:${seg}.${ms}</p>`;
 }
 
+// saves displayer
+let i = 0;
+const savesDisplayer = () => {
+    savestxt.innerHTML += `${saves[i]}`;
+    i++;
+}
+
 // save
 let saves = [];
-const save = () => {
-    saves.push(timer.innerHTML);
+const save = (t) => {
+    saves.push(t);
+    savesDisplayer();
 }
 
 // time
@@ -57,7 +66,7 @@ const pause = id => {
 }
 // main
 const main = {
-    'save':  () => save(),
+    'save':  () => save(timer.innerHTML),
     'start': () => preStart(),
     'pause': () => pause(intervalId)
 };
