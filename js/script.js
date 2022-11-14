@@ -6,8 +6,14 @@ let andamento = false;
 const button = event => main[event.target.id]();
 
 // displayer 
-const display = (h, min, seg, ms) => {
-    timer.innerHTML = `${h}:${min}:${seg}.${ms}`;
+const displayer = (h, min, seg, ms) => {
+    timer.innerHTML = `<p>${h}:${min}:${seg}.${ms}</p>`;
+}
+
+// save
+let saves = [];
+const save = () => {
+    saves.push(timer.innerHTML);
 }
 
 // time
@@ -41,7 +47,7 @@ const start = () => {
         time.min = 0;
         time.h++
     }
-    display(time.h, time.min, time.seg, time.ms);
+    displayer(time.h, time.min, time.seg, time.ms);
 }
 
 // pause
