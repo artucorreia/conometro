@@ -13,16 +13,14 @@ const displayer = (h, min, seg, ms) => {
 
 // saves displayer
 let i = 0;
-const savesDisplayer = () => {
-    savestxt.innerHTML += `${saves[i]}`;
-    i++;
-}
+const savesDisplayer = () => savestxt.innerHTML += `${saves[i]}`;
 
 // save
 let saves = [];
 const save = (t) => {
     saves.push(t);
     savesDisplayer();
+    i++;
 }
 
 // time
