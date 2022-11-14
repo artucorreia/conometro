@@ -8,7 +8,7 @@ const button = event => main[event.target.id]();
 
 // displayer 
 const displayer = (h, min, seg, ms) => {
-    timer.innerHTML = `<p>${h}:${min}:${seg}.${ms}</p>`;
+    timer.innerHTML = `<p>${min}:${seg}.${ms}</p>`;
 }
 
 // saves displayer
