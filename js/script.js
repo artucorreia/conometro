@@ -5,17 +5,17 @@ let andamento = false;
 
 const button = event => main[event.target.id]();
 
+// displayer 
+const display = (h, min, seg, ms) => {
+    timer.innerHTML = `${h}:${min}:${seg}.${ms}`;
+}
+
 // time
 let time = {
     'ms': 0,
     'seg': 0,
     'min': 0,
     'h': 0,
-}
-
-// displayer 
-const display = (h, min, seg, ms) => {
-    timer.innerHTML = `${h}:${min}:${seg}.${ms}`;
 }
 
 // verification 
