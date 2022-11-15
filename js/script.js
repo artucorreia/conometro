@@ -4,26 +4,31 @@ const savestxt = window.document.querySelector('div#saves');
 let intervalId = null;
 let andamento = false;
 
+// direciona para a main
 const button = event => main[event.target.id]();
 
-// displayer 
+// exibir tempo
 const displayer = (h, min, seg, ms) => {
-    timer.innerHTML = `<p>${min}:${seg}.${ms}</p>`;
+    if (h < 1) {
+        timer.innerHTML = `<p>${min}:${seg}.${ms}</p>`;
+    } else {
+        timer.innerHTML = `<p>${h}:${min}:${seg}.${ms}</p>`;
+    }
 }
 
-// saves displayer
-let i = 0;
+// exibir salvos
 const savesDisplayer = () => savestxt.innerHTML += `${saves[i]}`;
 
-// save
+// salvos
 let saves = [];
+let i = 0;
 const save = (t) => {
-    saves.push(t);
+    saves[i] = t;
     savesDisplayer();
     i++;
 }
 
-// time
+// tempo
 let time = {
     'ms': 0,
     'seg': 0,
@@ -31,7 +36,7 @@ let time = {
     'h': 0,
 }
 
-// verification 
+// verificação  
 let preStart = () => {
     if (!andamento) {
         intervalId = setInterval(start, 10);
@@ -39,7 +44,7 @@ let preStart = () => {
     }
 }
 
-// start timer
+// iniciar 
 const start = () => {
     time.ms+= 1
     if (time.ms > 99) {
@@ -57,17 +62,44 @@ const start = () => {
     displayer(time.h, time.min, time.seg, time.ms);
 }
 
-// pause
+// pausar
 const pause = id => {
     clearInterval(id);
     andamento = false;
 }
-// main
+
+// zerar tempo
+const stopTimer = () => {
+    timer.h = 0;
+    timer.min = 0;
+    timer.seg = 0;
+    timer.ms = 0;
+}
+
+// limpar exibir 
+const clearDisplay = () => timer.innerHTML = '<p>00:00.00</p>'
+
+// limpar salvos
+const clearSaves = () => {
+    savestxt.innerHTML = '';
+    i = 0;
+}
+
+// parar
+const stop = () => {
+    pause(intervalId);
+    clearSaves();
+    clearDisplay();
+    stopTimer();
+}
+
+// principal, direciona para as outras funcoes
 const main = {
     'save':  () => save(timer.innerHTML),
     'start': () => preStart(),
-    'pause': () => pause(intervalId)
+    'pause': () => pause(intervalId),
+    'stop':  () => stop()
 };
 
-// button   
+// botao 
 btns.addEventListener('click', button);
